@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -37,5 +38,10 @@ public class StudentController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping
+    public List<Student> getAllStudents(@RequestParam("gender") Optional<String> genderFilter) {
+        return studentService.findAllStudents(genderFilter);
     }
 }

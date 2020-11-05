@@ -3,9 +3,8 @@ package com.thoughtworks.capability.gtb.restfulapidesign.repo;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 import org.springframework.stereotype.Repository;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Repository
 public class StudentRepositoryDemo implements StudentRepository {
@@ -37,5 +36,10 @@ public class StudentRepositoryDemo implements StudentRepository {
     @Override
     public Optional<Student> deleteById(String id) {
         return Optional.ofNullable(students.remove(id));
+    }
+
+    @Override
+    public List<Student> findAll() {
+        return new ArrayList<>(students.values());
     }
 }
