@@ -11,4 +11,6 @@ public interface StudentRepository {
     Optional<Student> deleteById(String id);
 
     List<Student> findAll();
+
+    Optional<Student> findById(String id);
 }

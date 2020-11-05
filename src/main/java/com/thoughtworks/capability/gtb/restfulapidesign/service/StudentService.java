@@ -34,4 +34,8 @@ public class StudentService {
                         .collect(Collectors.toList()))
                 .orElse(allStudents);
     }
+
+    public Optional<Student> findById(String id) {
+        return studentRepo.findById(id);
+    }
 }

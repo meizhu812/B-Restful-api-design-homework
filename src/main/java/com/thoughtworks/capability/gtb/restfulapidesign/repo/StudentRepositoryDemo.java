@@ -42,4 +42,9 @@ public class StudentRepositoryDemo implements StudentRepository {
     public List<Student> findAll() {
         return new ArrayList<>(students.values());
     }
+
+    @Override
+    public Optional<Student> findById(String id) {
+        return Optional.ofNullable(students.getOrDefault(id, null));
+    }
 }

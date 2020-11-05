@@ -25,9 +25,11 @@ public class StudentController {
         Optional<Student> optionalStudent = studentService.addStudentFromRequest(request);
         if (optionalStudent.isPresent()) {
             Student student = optionalStudent.get();
-            return ResponseEntity.created(URI.create("/students/" + student.getId())).body(student);
+            return ResponseEntity.created(URI.create("/students/" + student.getId()))
+                    .body(student);
         } else {
-            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build();
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                    .build();
         }
     }
 
@@ -41,7 +43,14 @@ public class StudentController {
     }
 
     @GetMapping
-    public List<Student> getAllStudents(@RequestParam("gender") Optional<String> genderFilter) {
-        return studentService.findAllStudents(genderFilter);
+    public ResponseEntity<List<Student>> getAllStudents(@RequestParam("gender") Optional<String> genderFilter) {
+        return ResponseEntity.ok(studentService.findAllStudents(genderFilter));
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<Student> getStudent(@PathVariable String id) {
+        Optional<Student> optionalStudent = studentService.findById(id);
+        return optionalStudent.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }
