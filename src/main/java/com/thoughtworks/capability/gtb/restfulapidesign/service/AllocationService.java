@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 public class AllocationService {
     private final StudentService studentService;
     private final AllocationRepository allocationRepository;
-    public static final int TEAMS_PER_ALLOCATION = 6;
+    public static final int TEAMS_COUNT = 6;
 
     public AllocationService(StudentService studentService, AllocationRepository allocationRepository) {
         this.studentService = studentService;
@@ -49,14 +49,14 @@ public class AllocationService {
     private List<Team> getShuffledGroups() {
         List<Student> allStudents = studentService.findAllStudents(Optional.empty());
         Collections.shuffle(allStudents);
-        List<Team> teams = IntStream.rangeClosed(1, TEAMS_PER_ALLOCATION)
+        List<Team> teams = IntStream.rangeClosed(1, TEAMS_COUNT)
                 .mapToObj(index -> new Team(String.valueOf(index), "Team " + index, new ArrayList<>()))
                 .collect(Collectors.toList());
         int curTeamIndex = 0;
         for (Student student : allStudents) {
             teams.get(curTeamIndex).getStudents().add(student);
             curTeamIndex
-                    = curTeamIndex == TEAMS_PER_ALLOCATION - 1
+                    = curTeamIndex == TEAMS_COUNT - 1
                     ? 0
                     : curTeamIndex + 1;
         }
