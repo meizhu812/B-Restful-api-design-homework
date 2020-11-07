@@ -31,6 +31,21 @@ public class AllocationService {
         return allocationRepository.findLatest();
     }
 
+    public Optional<Allocation> updateTeamNameOfLatest(String teamId, String newName) {
+        Optional<Allocation> optionalAllocation = allocationRepository.findLatest();
+        if (!optionalAllocation.isPresent()) {
+            return Optional.empty();
+        }
+        Allocation allocation = optionalAllocation.get();
+        try {
+            Team team = allocation.getGroups().get(Integer.parseInt(teamId) - 1);
+            team.setName(newName);
+            return Optional.of(allocation);
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
     private List<Team> getShuffledGroups() {
         List<Student> allStudents = studentService.findAllStudents(Optional.empty());
         Collections.shuffle(allStudents);

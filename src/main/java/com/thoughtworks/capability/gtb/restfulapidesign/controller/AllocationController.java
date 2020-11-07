@@ -1,5 +1,6 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.controller;
 
+import com.thoughtworks.capability.gtb.restfulapidesign.controller.dto.ChangeTeamNameRequest;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Allocation;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.AllocationService;
 import org.springframework.http.HttpStatus;
@@ -36,5 +37,12 @@ public class AllocationController {
         Optional<Allocation> optionalAllocation = allocationService.getLatestAllocation();
         return optionalAllocation.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping("/latest/teams/{teamId}")
+    public ResponseEntity<Allocation> updateTeamNameOfLatestAllocation(@PathVariable String teamId, @RequestBody ChangeTeamNameRequest request) {
+        Optional<Allocation> optionalAllocation = allocationService.updateTeamNameOfLatest(teamId, request.getName());
+        return optionalAllocation.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.badRequest().build());
     }
 }
