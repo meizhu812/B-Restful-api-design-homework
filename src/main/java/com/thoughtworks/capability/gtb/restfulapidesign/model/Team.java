@@ -2,15 +2,15 @@ package com.thoughtworks.capability.gtb.restfulapidesign.model;
 
 import java.util.List;
 
-public class Group {
+public class Team {
     private String id;
     private String name;
     private List<Student> students;
 
-    public Group() {
+    public Team() {
     }
 
-    public Group(String id, String name, List<Student> students) {
+    public Team(String id, String name, List<Student> students) {
         this.id = id;
         this.name = name;
         this.students = students;

@@ -4,14 +4,14 @@ import java.util.List;
 
 public class Allocation {
     private String id;
-    private List<Group> groups;
+    private List<Team> teams;
 
     public Allocation() {
     }
 
-    public Allocation(String id, List<Group> groups) {
+    public Allocation(String id, List<Team> teams) {
         this.id = id;
-        this.groups = groups;
+        this.teams = teams;
     }
 
     public String getId() {
@@ -22,11 +22,11 @@ public class Allocation {
         this.id = id;
     }
 
-    public List<Group> getGroups() {
-        return groups;
+    public List<Team> getGroups() {
+        return teams;
     }
 
-    public void setGroups(List<Group> groups) {
-        this.groups = groups;
+    public void setGroups(List<Team> teams) {
+        this.teams = teams;
     }
 }
