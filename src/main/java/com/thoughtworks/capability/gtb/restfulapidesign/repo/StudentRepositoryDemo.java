@@ -4,12 +4,11 @@ import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Repository
 public class StudentRepositoryDemo implements StudentRepository {
     private final Map<String, Student> students = new TreeMap<>();
-    private static final int MAX_STUDENTS = 5;
+    private static final int MAX_STUDENTS = 15;
     private int currentIdNo = 0;
 
     public StudentRepositoryDemo() {

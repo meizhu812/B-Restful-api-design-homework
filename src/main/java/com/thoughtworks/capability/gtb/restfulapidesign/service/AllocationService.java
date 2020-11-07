@@ -60,6 +60,7 @@ public class AllocationService {
                     ? 0
                     : curGroupIndex + 1;
         }
+        teams.forEach(team -> team.getStudents().sort(Comparator.comparing(Student::getId)));
         return teams;
     }
 }
