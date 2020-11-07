@@ -52,13 +52,13 @@ public class AllocationService {
         List<Team> teams = IntStream.rangeClosed(1, TEAMS_PER_ALLOCATION)
                 .mapToObj(index -> new Team(String.valueOf(index), "Team " + index, new ArrayList<>()))
                 .collect(Collectors.toList());
-        int curGroupIndex = 0;
+        int curTeamIndex = 0;
         for (Student student : allStudents) {
-            teams.get(curGroupIndex).getStudents().add(student);
-            curGroupIndex
-                    = curGroupIndex == TEAMS_PER_ALLOCATION - 1
+            teams.get(curTeamIndex).getStudents().add(student);
+            curTeamIndex
+                    = curTeamIndex == TEAMS_PER_ALLOCATION - 1
                     ? 0
-                    : curGroupIndex + 1;
+                    : curTeamIndex + 1;
         }
         teams.forEach(team -> team.getStudents().sort(Comparator.comparing(Student::getId)));
         return teams;
