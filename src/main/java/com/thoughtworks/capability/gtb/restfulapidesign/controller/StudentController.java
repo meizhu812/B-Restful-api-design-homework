@@ -1,6 +1,6 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.controller;
 
-import com.thoughtworks.capability.gtb.restfulapidesign.controller.dto.AddStudentRequest;
+import com.thoughtworks.capability.gtb.restfulapidesign.controller.dto.StudentRequest;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.service.StudentService;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> addStudent(@RequestBody AddStudentRequest request) {
+    public ResponseEntity<Student> addStudent(@RequestBody StudentRequest request) {
         Optional<Student> optionalStudent = studentService.addStudentFromRequest(request);
         if (optionalStudent.isPresent()) {
             Student student = optionalStudent.get();
@@ -47,9 +47,16 @@ public class StudentController {
         return ResponseEntity.ok(studentService.findAllStudents(genderFilter));
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable String id) {
         Optional<Student> optionalStudent = studentService.findById(id);
+        return optionalStudent.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Student> updateStudent(@PathVariable String id, @RequestBody StudentRequest request) {
+        Optional<Student> optionalStudent = studentService.updateStudent(id, request);
         return optionalStudent.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

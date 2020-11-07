@@ -1,6 +1,6 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.service;
 
-import com.thoughtworks.capability.gtb.restfulapidesign.controller.dto.AddStudentRequest;
+import com.thoughtworks.capability.gtb.restfulapidesign.controller.dto.StudentRequest;
 import com.thoughtworks.capability.gtb.restfulapidesign.model.Student;
 import com.thoughtworks.capability.gtb.restfulapidesign.repo.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class StudentService {
         this.studentRepo = studentRepo;
     }
 
-    public Optional<Student> addStudentFromRequest(AddStudentRequest request) {
+    public Optional<Student> addStudentFromRequest(StudentRequest request) {
         return studentRepo.save(new Student(null, request.getName(), request.getGender(), request.getNote()));
     }
 
@@ -37,5 +37,10 @@ public class StudentService {
 
     public Optional<Student> findById(String id) {
         return studentRepo.findById(id);
+    }
+
+    public Optional<Student> updateStudent(String id, StudentRequest request) {
+        Student replacement = new Student(id, request.getName(), request.getGender(), request.getNote());
+        return studentRepo.save(replacement);
     }
 }

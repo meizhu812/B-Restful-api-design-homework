@@ -1,14 +1,14 @@
 package com.thoughtworks.capability.gtb.restfulapidesign.controller.dto;
 
-public class AddStudentRequest {
+public class StudentRequest {
     private String name;
     private String gender;
     private String note;
 
-    public AddStudentRequest() {
+    public StudentRequest() {
     }
 
-    public AddStudentRequest(String name, String gender, String note) {
+    public StudentRequest(String name, String gender, String note) {
         this.name = name;
         this.gender = gender;
         this.note = note;
