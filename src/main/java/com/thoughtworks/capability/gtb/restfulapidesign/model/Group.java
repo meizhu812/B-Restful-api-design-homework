@@ -5,16 +5,14 @@ import java.util.List;
 public class Group {
     private String id;
     private String name;
-    private String gender;
     private List<Student> students;
 
     public Group() {
     }
 
-    public Group(String id, String name, String gender, List<Student> students) {
+    public Group(String id, String name, List<Student> students) {
         this.id = id;
         this.name = name;
-        this.gender = gender;
         this.students = students;
     }
 
@@ -32,14 +30,6 @@ public class Group {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
     }
 
     public List<Student> getStudents() {
